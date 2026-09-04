@@ -13,8 +13,7 @@ RaceDay is a full-stack web-based event management system for the South African 
 - **SQL Script**: `/docs/RaceDay_Database.sql` - Complete schema with seed data
 
 ## CI/CD Status
-![CI/CD Build](<img width="1240" height="1023" alt="Screenshot_4-9-2026_23284_github com" src="https://github.com/user-attachments/assets/5839a679-3671-467c-bd33-e3bcb252ee6f" />
-)
+![CI/CD Build] <img width="1240" height="1023" alt="Screenshot_4-9-2026_23284_github com" src="https://github.com/user-attachments/assets/5839a679-3671-467c-bd33-e3bcb252ee6f" />
 
 ## Video Presentation
 [Unlisted YouTube Link](https://youtu.be/SQLTPflzNH4?si=DYFmCILwPjMBRvbM)
