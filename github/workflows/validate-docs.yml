@@ -1,0 +1,63 @@
+name: Validate Documentation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check docs folder exists
+        run: |
+          if [ ! -d "docs" ]; then
+            echo " docs folder not found!"
+            exit 1
+          fi
+          echo "docs folder exists"
+      
+      - name: Check ERD file exists
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "docs/ERD.png, docs/ERD.pdf"
+      
+      - name: Check API Endpoint Plan exists
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "docs/API_Endpoint_Plan.md, docs/API_Endpoint_Plan.pdf"
+      
+      - name: Check SQL script exists
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "docs/RaceDay_Database.sql"
+      
+      - name: Check README exists
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "README.md"
+      
+      - name: Validate SQL syntax (basic)
+        run: |
+          if [ -f "docs/RaceDay_Database.sql" ]; then
+            echo "SQL script found"
+            # Count tables in script
+            TABLE_COUNT=$(grep -c "CREATE TABLE" docs/RaceDay_Database.sql || true)
+            echo "Found $TABLE_COUNT CREATE TABLE statements"
+            if [ $TABLE_COUNT -lt 6 ]; then
+              echo "Less than 6 tables found!"
+              exit 1
+            fi
+            echo "SQL script validation passed"
+          else
+            echo "SQL script not found!"
+            exit 1
+          fi
+      
+      - name: All validations passed 
+      run: echo "✅ All documentation validations passed!"
