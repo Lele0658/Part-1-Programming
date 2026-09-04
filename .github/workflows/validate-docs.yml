@@ -1,0 +1,74 @@
+name: Validate Documentation
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check docs folder exists
+        run: |
+          if [ ! -d "docs" ]; then
+            echo "docs folder not found!"
+            exit 1
+          fi
+          echo " docs folder exists"
+      
+      - name: Check ERD file exists
+        run: |
+          if [ -f "docs/ERD.png" ] || [ -f "docs/ERD.pdf" ]; then
+            echo "ERD file found"
+          else
+            echo " ERD file not found! (docs/ERD.png or docs/ERD.pdf)"
+            exit 1
+          fi
+      
+      - name: Check API Endpoint Plan exists
+        run: |
+          if [ -f "docs/API_Endpoint_Plan.md" ] || [ -f "docs/API_Endpoint_Plan.pdf" ]; then
+            echo " API Endpoint Plan found"
+          else
+            echo " API Endpoint Plan not found! (docs/API_Endpoint_Plan.md or docs/API_Endpoint_Plan.pdf)"
+            exit 1
+          fi
+      
+      - name: Check SQL script exists
+        run: |
+          if [ -f "docs/RaceDay_Database.sql" ]; then
+            echo " SQL script found"
+          else
+            echo " SQL script not found! (docs/RaceDay_Database.sql)"
+            exit 1
+          fi
+      
+      - name: Validate SQL script
+        run: |
+          if [ -f "docs/RaceDay_Database.sql" ]; then
+            TABLE_COUNT=$(grep -c "CREATE TABLE" docs/RaceDay_Database.sql || true)
+            echo "Found $TABLE_COUNT CREATE TABLE statements"
+            if [ $TABLE_COUNT -lt 6 ]; then
+              echo "Less than 6 tables found!"
+              exit 1
+            fi
+            echo "QL script validation passed"
+          fi
+      
+      - name: Check README exists
+        run: |
+          if [ -f "README.md" ]; then
+            echo "README found"
+          else
+            echo "README not found!"
+            exit 1
+          fi
+      
+      - name: All validations passed
+        run: echo " All documentation validations passed!"
