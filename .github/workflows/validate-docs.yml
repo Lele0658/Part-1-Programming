@@ -24,7 +24,7 @@ jobs:
       
       - name: Check ERD file exists
         run: |
-          if [ -f "docs/ERD.png" ] || [ -f "docs/ERD.pdf" ]; then
+          if [ -f "docs/ERD Diagram.png" ] || [ -f "docs/ERD.pdf" ]; then
             echo "ERD file found"
           else
             echo " ERD file not found! (docs/ERD.png or docs/ERD.pdf)"
@@ -33,7 +33,7 @@ jobs:
       
       - name: Check API Endpoint Plan exists
         run: |
-          if [ -f "docs/API_Endpoint_Plan.md" ] || [ -f "docs/API_Endpoint_Plan.pdf" ]; then
+          if [ -f "docs/API Endpoint Reference Specification.md" ] || [ -f "docs/API_Endpoint_Plan.pdf" ]; then
             echo " API Endpoint Plan found"
           else
             echo " API Endpoint Plan not found! (docs/API_Endpoint_Plan.md or docs/API_Endpoint_Plan.pdf)"
