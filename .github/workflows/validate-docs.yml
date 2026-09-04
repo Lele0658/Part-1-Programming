@@ -42,17 +42,17 @@ jobs:
       
       - name: Check SQL script exists
         run: |
-          if [ -f "docs/RaceDay_Database.sql" ]; then
+          if [ -f "docs/RaceDayDB.sql" ]; then
             echo " SQL script found"
           else
-            echo " SQL script not found! (docs/RaceDay_Database.sql)"
+            echo " SQL script not found! (docs/RaceDayDB.sql)"
             exit 1
           fi
       
       - name: Validate SQL script
         run: |
-          if [ -f "docs/RaceDay_Database.sql" ]; then
-            TABLE_COUNT=$(grep -c "CREATE TABLE" docs/RaceDay_Database.sql || true)
+          if [ -f "docs/RaceDayDB.sql" ]; then
+            TABLE_COUNT=$(grep -c "CREATE TABLE" docs/RaceDayDB.sql || true)
             echo "Found $TABLE_COUNT CREATE TABLE statements"
             if [ $TABLE_COUNT -lt 6 ]; then
               echo "Less than 6 tables found!"
