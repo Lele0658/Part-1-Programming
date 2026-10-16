@@ -83,6 +83,44 @@ Part-1-Programming/
 ```
 
 ---
+## Database Schema
+
+RaceDay has **two database artifacts** that serve different purposes:
+
+### 1. `docs/RaceDayDB.sql` — Planned schema (Part 1)
+
+The formal database design submitted as part of Part 1. It contains handwritten `CREATE TABLE` statements matching the ERD exactly, along with seed data. It creates a database called **`RaceDayDB`**.
+
+This script represents the **full domain vision** of RaceDay and includes:
+- A dedicated `Roles` lookup table
+- A many-to-many relationship between Events and Categories via `EventCategories`
+- Enrolment status tracking (`Pending`, `Confirmed`, `Withdrawn`, `Completed`)
+- Bib number assignment
+- A `WeatherInfo` table for race-day preparation
+- Multiple indexes for performance
+
+### 2. `RaceDayApiDb` — Running schema (Part 2)
+
+The actual database the API reads and writes to at runtime. It is created by Entity Framework Core migrations in `RaceDay.Api/Migrations/` and is **not** the same as `RaceDayDB`. It implements the minimum schema required by the Part 2 functional requirements.
+
+### Deliberate differences
+
+Because Part 2 focuses on the API layer, the EF Core schema is a **simplified subset** of the Part 1 design:
+
+| Concern | Part 1 (`RaceDayDB`) | Part 2 (`RaceDayApiDb`) |
+|---------|----------------------|-------------------------|
+| Primary keys | `UserId`, `EventId`, … | `Id` |
+| Roles | Separate table | `Role` string column on `User` |
+| Categories | Global, many-to-many via junction | Owned by one Event, one-to-many |
+| Enrolment status | `Status` with check constraint | Not modelled |
+| Bib number | `BibNumber` column | Not modelled |
+| Weather | `WeatherInfo` table | Not modelled |
+| Route info | `RouteInfo` column | Not modelled |
+
+These differences are **intentional** — the Part 1 script documents the full planned system, while the Part 2 EF Core schema implements the specific features required for the RESTful API (authentication, events, categories, enrolments, and results). Future parts may extend the EF Core schema to align with the Part 1 vision.
+
+Full planned schema and seed data: `docs/RaceDayDB.sql`.  
+ERD: `docs/ERD Diagram.png`.
 
 ## Setup and Run Instructions
 
