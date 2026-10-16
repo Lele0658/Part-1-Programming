@@ -17,11 +17,6 @@ GO
 
 USE RaceDayDB;
 GO
-CREATE DATABASE RaceDayDB;
-GO
-
-USE RaceDayDB;
-GO
 
 -- ============================================================
 -- 1. ROLES Table
