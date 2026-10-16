@@ -122,6 +122,9 @@ These differences are **intentional** — the Part 1 script documents the full p
 Full planned schema and seed data: `docs/RaceDayDB.sql`.  
 ERD: `docs/ERD Diagram.png`.
 
+##Workflow
+
+
 ## Setup and Run Instructions
 
 ### Prerequisites
