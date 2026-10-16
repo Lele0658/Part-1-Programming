@@ -123,7 +123,8 @@ Full planned schema and seed data: `docs/RaceDayDB.sql`.
 ERD: `docs/ERD Diagram.png`.
 
 ##Workflow
-
+<img width="1240" height="1813" alt="Screenshot_16-10-2026_23170_github com" src="https://github.com/user-attachments/assets/0f006cbd-9286-4327-a861-062d17f17e04" />
+<img width="1240" height="786" alt="Screenshot_16-10-2026_231732_github com" src="https://github.com/user-attachments/assets/1960828c-cfea-49e9-a94e-d11f285fbc51" />
 
 ## Setup and Run Instructions
 
