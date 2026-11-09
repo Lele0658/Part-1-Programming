@@ -52,8 +52,3 @@ docker run -d -p 8080:8080 --name raceday-web raceday-mvc
 Access the application in your browser at: http://localhost:8080
 
 (Note: When running the MVC app inside Docker, ensure the API's BaseAddress in Program.cs is pointing to an accessible endpoint, e.g., http://host.docker.internal:5223/).
-
-YouTube Demonstration
-Watch the full application demonstration, MVC structure explanation and Azure Blob integration here:
-
- [INSERT YOUR UNLISTED YOUTUBE LINK HERE]
