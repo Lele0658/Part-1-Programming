@@ -1,0 +1,27 @@
+﻿@model List<RaceDay.Api.DTOs.EnrolmentResponseDto>
+@{ ViewData["Title"] = "Event Enrolments"; }
+
+<h2>Event Enrolments</h2>
+<a asp-action="ManageEvents" class="btn btn-secondary mb-3">Back to Events</a>
+
+<table class="table table-striped shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Participant</th>
+            <th>Category</th>
+            <th>Date Enrolled</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(!Model.Any()) {
+            <tr><td colspan="3" class="text-center">No participants enrolled yet.</td></tr>
+        }
+        @foreach(var item in Model) {
+            <tr>
+                <td>@item.ParticipantName</td>
+                <td>@item.CategoryName</td>
+                <td>@item.EnrolledDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

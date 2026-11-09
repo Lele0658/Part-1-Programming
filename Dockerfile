@@ -1,0 +1,22 @@
+# Use the official ASP.NET Core runtime as a base image
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+WORKDIR /app
+EXPOSE 8080
+
+# Use the SDK image to build the app
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+COPY ["RaceDay.Mvc/RaceDay.Mvc.csproj", "RaceDay.Mvc/"]
+RUN dotnet restore "RaceDay.Mvc/RaceDay.Mvc.csproj"
+COPY . .
+WORKDIR "/src/RaceDay.Mvc"
+RUN dotnet build "RaceDay.Mvc.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "RaceDay.Mvc.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Build runtime image
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "RaceDay.Mvc.dll"]

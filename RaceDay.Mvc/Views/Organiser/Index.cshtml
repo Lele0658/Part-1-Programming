@@ -1,0 +1,26 @@
+﻿@model List<RaceDay.Api.DTOs.EventResponseDto>
+@{ ViewData["Title"] = "Organiser Dashboard"; }
+
+<h2 class="mb-4">Organiser Dashboard</h2>
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card bg-primary text-white shadow">
+            <div class="card-body">
+                <h5 class="card-title">Total Events</h5>
+                <h1 class="display-4">@Model.Count</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4>Upcoming Events</h4>
+<ul class="list-group shadow-sm">
+    @foreach(var ev in Model.Take(5)) {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <strong>@ev.Name</strong> - @ev.Date.ToString("dd MMM yyyy")
+            </div>
+            <a asp-action="ViewEnrolments" asp-route-id="@ev.Id" class="btn btn-sm btn-outline-primary">View Enrolments</a>
+        </li>
+    }
+</ul>
